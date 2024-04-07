@@ -326,7 +326,12 @@ def regenerate_outfit(user, flag=0):
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow([outfit[1], outfit[0], outfit[2]])
 
-    if [outfit[1], outfit[0], outfit[2]] == current_images and flag <= 10:
+    if ([outfit[1], outfit[0], outfit[2]] == current_images or
+        [outfit[1], outfit[0]] == [current_images[0], current_images[1]] or
+        [outfit[0], outfit[2]] == [current_images[1], current_images[2]] or
+        [outfit[2], outfit[1]] == [current_images[2], current_images[0]]) and flag <= 10:
+        return regenerate_outfit(user, flag + 1)
+    if [outfit[1], outfit[0], outfit[2]] == current_images and flag<=15:
         return regenerate_outfit(user, flag + 1)
 
     return [outfit[1], outfit[0], outfit[2]]

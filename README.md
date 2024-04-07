@@ -1,6 +1,12 @@
 # OutfitOracle
 
-OutfitOracle is an innovative project that combines the power of Python and Node.js to provide a comprehensive solution for [briefly describe the purpose or functionality of your project here].
+OutfitOracle is an innovative project that combines the power of Python and Node.js to provide a 
+comprehensive solution for the need to spend few minutes everyday looking in your closet, not knowing what to wear,
+while also keeping it stylish, and fit to the weather.
+
+Given the user’s wardrobe, and the weather for the day, the system
+suggests an outfit. With time, the system will learn about the user’s style and
+preferences and will be able to suggest better outfits.
 
 ## Prerequisites
 
@@ -69,6 +75,7 @@ OutfitOracle provides two predefined user profiles you can use to log in and exp
 
 1. **Username**: `alon` - A male profile with a complete wardrobe and training data.
 2. **Username**: `inbar` - A female profile with a complete wardrobe and basic training data.
+3. **Username**: `your username` - You can add yourself to the system as well, but don't forget to add your wardrobe as well.
 
 Choose one of these usernames to log in and access the home page.
 

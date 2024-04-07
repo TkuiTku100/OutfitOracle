@@ -38,6 +38,7 @@ start_of_overtop = 17
 end_of_overtop = 34
 start_of_bottom = 34
 end_of_bottom = 51
+no_overtop = "1711917857463.png"
 
 
 @app.route('/predict-image')
@@ -207,6 +208,19 @@ def nn_find_cloths(input, prediction, outfit_dataset, user, categories=["top", "
 
         if category == "overtop":
             distances, indices = nbrs.kneighbors(prediction_subset, 1)
+            most_similar_index = indices[0]
+            print(most_similar_index)
+            most_similar_index = choose_index_with_probability(most_similar_index)
+            print(most_similar_index)
+            most_similar_item = category_data.iloc[most_similar_index]
+            if most_similar_item["ImagePath"] != no_overtop:
+                try:
+                    distances, indices = nbrs.kneighbors(prediction_subset, 3)
+                except:
+                    try:
+                        distances, indices = nbrs.kneighbors(prediction_subset, 2)
+                    except:
+                        distances, indices = nbrs.kneighbors(prediction_subset, 1)
 
         else:
             try:
@@ -312,7 +326,7 @@ def regenerate_outfit(user, flag=0):
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow([outfit[1], outfit[0], outfit[2]])
 
-    if [outfit[1], outfit[0], outfit[2]] == current_images and flag <= 7:
+    if [outfit[1], outfit[0], outfit[2]] == current_images and flag <= 10:
         return regenerate_outfit(flag + 1)
 
     return [outfit[1], outfit[0], outfit[2]]

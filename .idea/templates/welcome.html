@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfit Oracle</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<style>
+    /* Style for the buttons */
+    .content {
+        margin-top: 20px; /* Add margin to the top */
+    }
+    .formContainer {
+        width: 50%; /* Adjust the width as needed */
+        text-align: left; /* Align the form contents to the left */
+        margin-bottom: 30px;
+    }
+    form {
+        display: inline-block;
+        text-align: left; /* Align the content inside the form to the left */
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+    form label {
+        display: block; /* Make labels appear on new lines */
+    }
+    form select, form input[type="file"], form button {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    button {
+        background-color: #bca7ee; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s;
+    }
+
+    /* Change the color of the button on hover */
+    button:hover {
+        background-color: #7359b2;
+    }
+</style>
+<body style="background-image: url('sunny.jpg'); text-align:center; font-family:helvetica; margin-top:10px; background-size: cover;">
+<H1>
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: left; border: none;">
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: right; border: none;">
+    <span class="big" style="font-size: 72px; color:#ffffff; text-align:center;text-shadow: 3px 3px #3e7efc ; position: relative; top: 25px;">Outfit Oracle</span> <br>
+    <span class="small" style="font-size: 42px; color:#ffffff; -webkit-text-stroke-width: 1.2px; -webkit-text-stroke-color: #7359b2; position: relative; top: 15px">Welcome to the website</span>
+</H1>
+<br>
+<p>Please enter your username:</p>
+<input type="text" id="usernameInput" placeholder="Username">
+<button onclick="saveUsername()">Submit</button>
+
+<script>
+    function saveUsername() {
+        const userName = document.getElementById('usernameInput').value;
+        if(userName) {
+            localStorage.setItem('username', userName);
+            // Optionally, redirect to another page after saving
+            window.location.href = 'home.html';
+        } else {
+            alert('Please enter a username.');
+        }
+    }
+</script>
+</body>
+</html>

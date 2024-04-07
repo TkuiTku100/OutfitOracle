@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfit Oracle</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<style>
+    .content {
+        margin-top: 20px;
+    }
+
+    .formContainer {
+        width: 50%;
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: inline-block;
+        text-align: left;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    form label {
+        display: block;
+    }
+
+    form select, form input[type="file"], form button {
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: #bca7ee;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s;
+    }
+
+    button:hover {
+        background-color: #7359b2;
+    }
+
+    #Wardrobe {
+        position: absolute;
+        left: 50px;
+        bottom: 30px;
+    }
+</style>
+<body style="background-color:#aad7f6; text-align:center; font-family:helvetica; margin-top:10px">
+<div class="content">
+    <H1>
+        <img src="logo.png" alt="outfit oracle logo" title="logo"
+             style="height:180px; width:200px; float: left; border: none;">
+        <img src="logo.png" alt="outfit oracle logo" title="logo"
+             style="height:180px; width:200px; float: right; border: none;">
+        <span class="big"
+              style="font-size: 72px; color:#ffffff; text-align:center;text-shadow: 3px 3px #3e7efc; position: relative; top: 25px;">Outfit Oracle</span>
+        <br>
+        <span class="small"
+              style="font-size: 42px; color:#ffffff; -webkit-text-stroke-width: 1.2px; -webkit-text-stroke-color: #7359b2; position: relative; top: 15px">Add clothing items</span>
+    </H1>
+    <div class="clothingForm">
+        <form id="clothingForm" style="align-content: center">
+
+            <label for="userName">User Name:</label>
+            <input id="userName" name="userName" placeholder="username" required>
+            </input><br>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="">Select Category</option>
+                <option value="overtop">Over Top</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+            </select><br>
+
+            <label for="color">Color:</label>
+            <select id="color" name="color" required>
+                <option value="">Select Color</option>
+                <option value="red">red</option>
+                <option value="orange">orange</option>
+                <option value="yellow">yellow</option>
+                <option value="green">green</option>
+                <option value="blue">blue</option>
+                <option value="purple">purple</option>
+                <option value="black">black</option>
+                <option value="white">white</option>
+                <option value="gray">gray</option>
+                <option value="brown">brown</option>
+            </select><br>
+
+            <label for="pattern">Pattern:</label>
+            <select id="pattern" name="pattern" required>
+                <option value="">Select Pattern</option>
+                <option value="horizontal-lines">Horizontal Lines</option>
+                <option value="vertical-lines">Vertical Lines</option>
+                <option value="plaid">Plaid</option>
+                <option value="plain">Plain</option>
+                <option value="drawing">Drawing</option>
+            </select><br>
+
+            <label for="length">Length:</label>
+            <select id="length" name="length" required>
+                <option value="">Select Length</option>
+                <option value="short">Short</option>
+                <option value="medium">Medium</option>
+                <option value="long">Long</option>
+            </select><br>
+
+            <label for="fit">Fit:</label>
+            <select id="fit" name="fit" required>
+                <option value="">Select Fit</option>
+                <option value="tight">Tight</option>
+                <option value="loose">Loose</option>
+                <option value="oversize">Oversize</option>
+                <option value="fit">Fit</option>
+            </select><br>
+
+            <label for="clothingImage">Clothing Image:</label>
+            <input type="file" id="clothingImage" name="clothingImage" accept="image/*" required><br>
+
+            <button type="submit">Add Clothing Item</button>
+        </form>
+    </div>
+    <button id="Wardrobe">Back to Wardrobe</button>
+</div>
+<script>
+    function setBackgroundImage() {
+// Get the weather condition from localStorage (set by index.html)
+        const weatherCondition = localStorage.getItem('weatherCondition');
+        console.log('Weather condition:', localStorage.getItem('weatherCondition'));
+
+// Set background image based on weather condition
+        const body = document.body;
+        if (weatherCondition === 'sunny') {
+            body.style.backgroundImage = 'url("sunny.jpg")';
+        } else if (weatherCondition === 'cloudy') {
+            body.style.backgroundImage = 'url("cloudy.jpg")';
+        } else if (weatherCondition === 'rainy') {
+            body.style.backgroundImage = 'url("rainy.jpg")';
+        }
+        body.style.backgroundSize = 'cover';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Event listener for "Wardrobe" button
+        document.getElementById('Wardrobe').addEventListener('click', function () {
+            // Redirect to wardrobe.html
+            window.location.href = 'wardrobe.html';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const username = localStorage.getItem('username');
+        if (username) {
+            // Greet the user
+
+            // Find the username input field and set its value
+            const usernameInput = document.getElementById('userName');
+            if (usernameInput) {
+                console.log(usernameInput); // Check if the input field is found
+                usernameInput.value = username; // Automatically fill the username in the form
+            }
+        } else {
+            // Redirect back to the welcome page if the username is not set
+            window.location.href = 'welcome.html';
+        }
+    });
+    setBackgroundImage()
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Previous submissions are stored in localStorage
+        let submissions = JSON.parse(localStorage.getItem('submissions')) || [];
+
+        document.getElementById('clothingForm').addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(this); // Use 'this' to refer to the form and automatically capture all fields
+
+            // Alternatively, manually append each field if needed
+            // formData.append('userName', document.getElementById('userName').value);
+            // Add other fields similarly...
+
+            try {
+                const response = await fetch('http://localhost:3001/add-clothing-item', {
+                    method: 'POST',
+                    body: formData, // Pass the updated formData with all fields
+                    // Note: Don't set 'Content-Type' header when using FormData, let the browser set it
+                });
+
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const result = await response.text();
+                console.log('Success:', result);
+                alert('Data saved successfully');
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to save data');
+            }
+            const savedUsername = document.getElementById('userName').value;
+            this.reset();
+            document.getElementById('userName').value = savedUsername;
+        });
+
+    });
+
+    function jsonToCSV(jsonObject) {
+        const csvRows = [];
+        const headers = Object.keys(jsonObject[0]);
+        csvRows.push(headers.join(',')); // Add header row
+
+        for (const row of jsonObject) {
+            const values = headers.map(header => {
+                const escaped = ('' + row[header]).replace(/"/g, '\\"');
+                return `"${escaped}"`;
+            });
+            csvRows.push(values.join(','));
+        }
+
+        return csvRows.join('\n');
+    }
+
+    function downloadCSV(csvString, filename) {
+        const blob = new Blob([csvString], {type: 'text/csv;charset=utf-8;'});
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", filename);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+/* Enhanced body styling for overall page aesthetics */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; /* Removed padding here to avoid affecting center alignment */
+    background-color: #f0f0f0;
+    background-size: cover 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures body takes up at least the full viewport height */
+}
+
+/* Updated styles for the main content container for improved centering */
+.content {
+    width: calc(100% - 40px); /* Adjusted to account for padding */
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px; /* Retain padding inside .content for spacing around your content */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center; /* Centers inline elements like text and buttons */
+}
+
+/* Adjustments for buttons to enhance usability and aesthetics */
+button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: auto; /* Adjust if you want specific button width */
+    display: inline-block; /* Ensures buttons can be centered with text-align */
+}
+
+/* Styles for form enhancements for better layout and centering */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form input[type="text"],
+form input[type="email"],
+form button {
+    padding: 10px;
+    margin: 10px 0;
+    width: calc(100% - 22px); /* Adjust form elements width including padding */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}

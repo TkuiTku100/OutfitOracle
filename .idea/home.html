@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfit Oracle</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<style>
+    /* Style for the buttons */
+    .content {
+        margin-top: 20px; /* Add margin to the top */
+    }
+
+    .formContainer {
+        width: 50%; /* Adjust the width as needed */
+        text-align: left; /* Align the form contents to the left */
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: inline-block;
+        text-align: left; /* Align the content inside the form to the left */
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    form label {
+        display: block; /* Make labels appear on new lines */
+    }
+
+    form select, form input[type="file"], form button {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        background-color: #bca7ee; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s;
+    }
+
+    /* Change the color of the button on hover */
+    button:hover {
+        background-color: #7359b2;
+    }
+
+    #log_in {
+        position: absolute;
+        left: 50px; /* Adjust the left distance */
+        bottom: 30px; /* Adjust the bottom distance */
+    }
+</style>
+<body style="background-image: url('sunny.jpg'); text-align:center; font-family:helvetica; margin-top:10px; background-size: cover;">
+<H1>
+    <img src="logo.png" alt="outfit oracle logo" title="logo"
+         style="height:180px; width:200px; float: left; border: none;">
+    <img src="logo.png" alt="outfit oracle logo" title="logo"
+         style="height:180px; width:200px; float: right; border: none;">
+    <span class="big"
+          style="font-size: 72px; color:#ffffff; text-align:center;text-shadow: 3px 3px #3e7efc ; position: relative; top: 25px;">Outfit Oracle</span>
+    <br>
+    <span class="small"
+          style="font-size: 42px; color:#ffffff; -webkit-text-stroke-width: 1.2px; -webkit-text-stroke-color: #7359b2; position: relative; top: 15px">We choose your outfit for you!</span>
+</H1>
+<!-- Main content container -->
+<div class="content">
+    <button id="log_in"> Log In</button>
+    <div class="weatherForm" style="position: fixed; bottom: 0; right: 0; margin: 20px;">
+        <form id="weatherForm">
+            <label for="weather">Weather Condition:</label>
+            <select id="weather" name="weather">
+                <option value="sunny">Sunny</option>
+                <option value="cloudy">Cloudy</option>
+                <option value="rainy">Rainy</option>
+            </select><br>
+            <label for="number">Temperature:(Celsius)</label>
+            <input type="number" id="number" name="number" min="-10" max="50"><br>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" pattern="HH:mm"><br>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <!-- Buttons to show different images -->
+    <span id="greeting"></span><br>
+    <span id="message"></span><br>
+    <button id="generateOutfit">Generate Outfit</button>
+    <button id="regenerateOutfit">Re-Generate Outfit</button>
+
+
+<!--    <div id="imageContainer">-->
+<!--        <img src="https://via.placeholder.com/300" id="displayedImage" alt="Placeholder">-->
+<!--    </div>-->
+    <div id="predictedContainer">
+        <img src="http://localhost:5001/uploads/1711917857463.png" id="overtopImg" alt="Overtop" style="height: 300px;">
+        <img src="http://localhost:5001/uploads/1711917857463.png" id="topImg" alt="Top" style="height: 300px;">
+        <img src="http://localhost:5001/uploads/1711917857463.png" id="bottomImg" alt="Bottom" style="height: 300px;"><br>
+
+        <button id="changeOvertop">Change Overtop</button>
+        <button id="changeTop">Change Top</button>
+        <button id="changeBottom">Change Bottom</button><br>
+    </div>
+
+
+    <!-- Placeholder for weather information -->
+    <button id="Wardrobe">Wardrobe</button>
+</div>
+
+<!-- JavaScript code -->
+<script>
+//     document.addEventListener('DOMContentLoaded', function () {
+// // Event listener for "Generate Outfit" button
+//         document.getElementById('generateOutfit').addEventListener('click', function () {
+// // Changes the source of the displayed image to Image 1
+//             document.getElementById('displayedImage').style.height = '300px'
+//             document.getElementById('displayedImage').src = 'outfit1.jpeg';
+//             document.getElementById('displayedImage').style.opacity = '100%'
+//
+//         });
+
+//         document.getElementById('regenerateOutfit').addEventListener('click', function () {
+// // Changes the source of the displayed image to Image 1
+//             document.getElementById('displayedImage').style.height = '300px'
+//             document.getElementById('displayedImage').src = 'outfit3.png';
+//             document.getElementById('displayedImage').style.opacity = '100%'
+//
+//         });
+
+// Event listener for form submission
+        document.getElementById('weatherForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevents the default form submission action
+            console.log('Form submitted.'); // Check console for "Form submitted" message
+
+// Get selected weather condition and number
+            const weatherSelect = document.getElementById('weather');
+            const weatherCondition = weatherSelect.value;
+            const numberInput = document.getElementById('number');
+            const numberValue = parseInt(numberInput.value, 10);
+            const timeInput = document.getElementById('time');
+            const timeValue = timeInput.value;
+            const timeParts = timeValue.split(":");
+            const hours = parseInt(timeParts[0]);
+            console.log('Weather condition:', weatherCondition);
+
+            const greetingSpan = document.getElementById('greeting');
+            const messageSpan = document.getElementById('message');
+
+            if (hours >= 5 && hours < 12) {
+                greetingSpan.textContent = `Good Morning!`;
+                messageSpan.textContent = `Let's set you up with an outfit for a ${weatherCondition} day with ${numberValue} degrees outside.`;
+            } else if (hours >= 12 && hours < 18) {
+                greetingSpan.textContent = `Good Afternoon!`;
+                messageSpan.textContent = `Let's set you up with an outfit for a ${weatherCondition} day with ${numberValue} degrees outside.`;
+            } else if (hours >= 18 && hours < 21) {
+                greetingSpan.textContent = `Good Evening!`;
+                messageSpan.textContent = `Let's set you up with an outfit for a ${weatherCondition} night out with ${numberValue} degrees outside.`;
+            } else {
+                greetingSpan.textContent = `Good Night!`;
+                messageSpan.textContent = `Let's set you up with an outfit for a ${weatherCondition} night out with ${numberValue} degrees outside.`;
+            }
+
+// Save weather condition to localStorage for other pages to access
+            localStorage.setItem('weatherCondition', weatherCondition);
+            localStorage.setItem('temperature', numberValue);
+            localStorage.setItem('hour', hours);
+
+
+// Change background based on weather condition and number
+            const body = document.body;
+            if (weatherCondition === 'sunny') {
+                body.style.backgroundImage = 'none'; // Reset any existing background image
+                body.style.backgroundColor = '#aad7f6'; // Set background color if needed
+                body.style.backgroundImage = 'url("sunny.jpg")'; // Set sunny background image
+                body.style.backgroundSize = 'cover';
+            } else if (weatherCondition === 'cloudy') {
+                body.style.backgroundImage = 'none'; // Reset any existing background image
+                body.style.backgroundColor = '#aad7f6'; // Set background color if needed
+                body.style.backgroundImage = 'url("cloudy.jpg")'; // Set cloudy background image
+                body.style.backgroundSize = 'cover';
+            } else if (weatherCondition === 'rainy') {
+                body.style.backgroundImage = 'none'; // Reset any existing background image
+                body.style.backgroundColor = '#aad7f6'; // Set background color if needed
+                body.style.backgroundImage = 'url("rainy.jpg")'; // Set rainy background image
+                body.style.backgroundSize = 'cover';
+            }
+
+// Reset form
+            weatherSelect.selectedIndex = 0;
+            numberInput.value = '';
+            timeInput.value = '';
+        });
+
+    function setBackgroundImage() {
+// Get the weather condition from localStorage (set by index.html)
+        const weatherCondition = localStorage.getItem('weatherCondition');
+        console.log('Weather condition:', localStorage.getItem('weatherCondition'));
+
+// Set background image based on weather condition
+        const body = document.body;
+        if (weatherCondition === 'sunny') {
+            body.style.backgroundImage = 'url("sunny.jpg")';
+        } else if (weatherCondition === 'cloudy') {
+            body.style.backgroundImage = 'url("cloudy.jpg")';
+        } else if (weatherCondition === 'rainy') {
+            body.style.backgroundImage = 'url("rainy.jpg")';
+        }
+        body.style.backgroundSize = 'cover';
+    }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Event listener for "Wardrobe" button
+        document.getElementById('Wardrobe').addEventListener('click', function () {
+            // Redirect to wardrobe.html
+            window.location.href = 'wardrobe.html';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Event listener for "Wardrobe" button
+        document.getElementById('log_in').addEventListener('click', function () {
+            // Redirect to wardrobe.html
+            window.location.href = 'welcome.html';
+        });
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const username = localStorage.getItem('username');
+        if (username) {
+        } else {
+            // Redirect back to welcome page if username is not set
+            window.location.href = 'welcome.html';
+        }
+    });
+    setBackgroundImage(); // Call the function to set background image
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to fetch and update a specific item
+        function updateItem(itemType) {
+            fetch(`http://localhost:5001/predict-image?type=${itemType}&condition=${localStorage.getItem('weatherCondition')}&temperature=${localStorage.getItem('temperature')}&hour=${localStorage.getItem('hour')}&user=${localStorage.getItem('username')}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (itemType === 'generate' || itemType === 'regenerate') {
+                        // If itemType is 'all', we expect an array of paths
+                        // Assuming the order of paths matches [overtop, top, bottom]
+                        const categories = ['overtop', 'top', 'bottom'];
+                        categories.forEach((cat, index) => {
+                            const imgElement = document.getElementById(`${cat}Img`);
+                            imgElement.src = `http://localhost:5001/uploads/${data.predictedImagePath[index]}`;
+                        });
+                    } else {
+                        // For specific item types (overtop, top, bottom), update a single image
+                        const imgElement = document.getElementById(`${itemType}Img`);
+                        imgElement.src = `http://localhost:5001/uploads/${data.predictedImagePath}`;
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+            console.log('aaa')
+            console.log()
+
+        }
+
+        document.getElementById('generateOutfit').addEventListener('click', () => updateItem('generate'));
+        document.getElementById('regenerateOutfit').addEventListener('click', () => updateItem('regenerate'));
+
+        document.getElementById('changeOvertop').addEventListener('click', () => updateItem('overtop'));
+        document.getElementById('changeTop').addEventListener('click', () => updateItem('top'));
+        document.getElementById('changeBottom').addEventListener('click', () => updateItem('bottom'));
+    });
+
+</script>
+</body>
+</html>

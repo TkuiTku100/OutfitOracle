@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfit Oracle</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<style>
+    /* Style for the buttons */
+    .content {
+        margin-top: 20px; /* Add margin to the top */
+    }
+    .formContainer {
+        width: 50%; /* Adjust the width as needed */
+        text-align: left; /* Align the form contents to the left */
+        margin-bottom: 30px;
+    }
+    form {
+        display: inline-block;
+        text-align: left; /* Align the content inside the form to the left */
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+    form label {
+        display: block; /* Make labels appear on new lines */
+    }
+    form select, form input[type="file"], form button {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    button {
+        background-color: #bca7ee; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s;
+    }
+
+    /* Change the color of the button on hover */
+    button:hover {
+        background-color: #7359b2;
+    }
+</style>
+<body style="background-image: url('sunny.jpg'); text-align:center; font-family:helvetica; margin-top:10px; background-size: cover;">
+<H1>
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: left; border: none;">
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: right; border: none;">
+    <span class="big" style="font-size: 72px; color:#ffffff; text-align:center;text-shadow: 3px 3px #3e7efc ; position: relative; top: 25px;">Outfit Oracle</span> <br>
+    <span class="small" style="font-size: 42px; color:#ffffff; -webkit-text-stroke-width: 1.2px; -webkit-text-stroke-color: #7359b2; position: relative; top: 15px">Welcome to the website</span>
+</H1>
+<br>
+<h1 style="color:#333; font-size:20px; margin-left: 280px; margin-right: 280px">Welcome to Outfit Oracle, your personalized fashion assistant that blends style with convenience to curate outfits tailored just for you.<br>
+    <br>At Outfit Oracle, we understand that choosing the perfect outfit can be a daunting task, especially when you have to consider the ever-changing weather and your unique style preferences.<br>
+    <br>That's why we've created a platform that does the hard work for you, ensuring you step out in confidence, no matter the occasion or weather forecast.<br>
+    <br>After choosing weather condition, temperature, and time, you can generate your outfit by pressing on the 'generate' button.<br>
+    If you are not pleased with the outcome, you can re-generate or change every part of the suggested outfit, we'll learn from it and do better next time ;)<br>
+    Once you're done the system will assume you liked the outfit.
+</h1>
+<br>
+<p>Please enter your username:</p>
+<input type="text" id="usernameInput" placeholder="Username">
+<button onclick="saveUsername()">Submit</button>
+
+<script>
+        // Function to fetch and update a specific item
+    function saveUsername() {
+        const userName = document.getElementById('usernameInput').value;
+        if (userName) {
+            localStorage.setItem('username', userName);
+            // Make a request to the new-user endpoint
+            fetch(`http://localhost:5001/new-user?user=${userName}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Log or handle the response data
+                    // Optionally, redirect to another page after the request completes
+                    window.location.href = 'home.html';
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            alert('Please enter a username.');
+        }
+    }
+
+    // Attach the event listener programmatically instead of using inline JavaScript.
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('button').addEventListener('click', saveUsername);
+    });
+</script>
+</body>
+</html>

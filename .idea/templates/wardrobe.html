@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outfit Oracle</title>
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+</head>
+<style>
+    /* Style for the buttons */
+    button {
+        background-color: #bca7ee; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition-duration: 0.4s;
+    }
+    /* Change the color of the button on hover */
+    button:hover {
+        background-color: #7359b2;
+    }
+    #Home {
+        position: absolute;
+        left: 50px; /* Adjust the left distance */
+        bottom: 30px; /* Adjust the bottom distance */
+    }
+</style>
+<body style="background-color:#aad7f6; text-align:center; font-family:helvetica; margin-top:10px">
+<H1>
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: left; border: none;">
+    <img src="logo.png" alt="outfit oracle logo" title="logo" style="height:180px; width:200px; float: right; border: none;">
+    <span class="big" style="font-size: 72px; color:#ffffff; text-align:center;text-shadow: 3px 3px #3e7efc ; position: relative; top: 25px;">Outfit Oracle</span> <br>
+    <span class="small" style="font-size: 42px; color:#ffffff; -webkit-text-stroke-width: 1.2px; -webkit-text-stroke-color: #7359b2; position: relative; top: 15px">Welcome to your wardrobe</span>
+</H1>
+<br>
+<br>
+<br>
+<br>
+<div id="wardrobeImageContainer">
+    <img src="item1.jpeg" id="wardrobeDisplayedImage" alt="Wardrobe Items" style="height: 300px">
+</div>
+<button id="changeImage">Next Item</button>
+
+<button id="AddClothingItems">Add clothing items</button>
+<button id="Home"> Back Home</button>
+
+<!-- Your wardrobe content here -->
+
+<script>
+    function setBackgroundImage() {
+// Get the weather condition from localStorage (set by index.html)
+        const weatherCondition = localStorage.getItem('weatherCondition');
+        console.log('Weather condition:', localStorage.getItem('weatherCondition'));
+
+// Set background image based on weather condition
+        const body = document.body;
+        if (weatherCondition === 'sunny') {
+            body.style.backgroundImage = 'url("sunny.jpg")';
+        } else if (weatherCondition === 'cloudy') {
+            body.style.backgroundImage = 'url("cloudy.jpg")';
+        } else if (weatherCondition === 'rainy') {
+            body.style.backgroundImage = 'url("rainy.jpg")';
+        }
+        body.style.backgroundSize = 'cover';
+    }
+
+    // Event listener for the "Add Clothing Items" button
+    document.getElementById('AddClothingItems').addEventListener('click', function() {
+        // Redirect to add_clothing_items.html
+        window.location.href = 'add_clothing_items.html';
+    });
+    document.getElementById('Home').addEventListener('click', function() {
+        // Redirect to add_clothing_items.html
+        window.location.href = 'home.html';
+    });
+    document.addEventListener('DOMContentLoaded', () => {
+        const username = localStorage.getItem('username');
+        if(username) {
+        } else {
+            // Redirect back to welcome page if username is not set
+            window.location.href = 'welcome.html';
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentImageIndex = 0;
+        var imageUrls = [
+            'item1.jpeg', // Example image URL
+            'item2.jpeg', // Another example image URL
+            'item3.jpeg',  // And another example image URL
+            'item4.jpeg'
+            // Add as many image URLs as you have for the wardrobe items
+        ];
+
+        document.getElementById('changeImage').addEventListener('click', function() {
+            currentImageIndex = (currentImageIndex + 1) % imageUrls.length; // Cycle through image URLs
+            document.getElementById('wardrobeDisplayedImage').style.height = '300px'
+            document.getElementById('wardrobeDisplayedImage').src = imageUrls[currentImageIndex]; // Update the image source
+        });
+    });
+    setBackgroundImage(); // Call the function to set background image
+</script>
+</body>
+</html>

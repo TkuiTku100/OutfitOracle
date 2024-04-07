@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Images</title>
+</head>
+<body>
+<div id="imageContainer"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('http://localhost:5000/select-images', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Send any required data as JSON
+            body: JSON.stringify({}),
+        })
+            .then(response => response.json())
+            .then(imageFilenames => {
+                const container = document.getElementById('imageContainer');
+                imageFilenames.forEach(filename => {
+                    const img = document.createElement('img');
+                    img.src = `http://localhost:5000/uploads/${filename}`;
+                    container.appendChild(img);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>

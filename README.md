@@ -26,7 +26,7 @@ Clone the OutfitOracle repository to your local machine and navigate into it:
 
 ```bash
 git clone https://github.com/TkuiTku100/OutfitOracle.git
-cd OutfitOracle
+cd path/to/project
 ```
 
 ### 2. Set Up the Conda Environment
@@ -51,6 +51,7 @@ python pred.py
 Open a new terminal window, activate the Conda environment again, and run the Node.js server:
 
 ```bash
+cd path/to/project
 conda activate outfitoracle
 node server.js
 ```
@@ -60,8 +61,9 @@ node server.js
 Lastly, in a new terminal window, activate the Conda environment, navigate to the .idea folder within the project, and open the welcome.html file in your default browser:
 
 ```bash
-conda activate outfitoracle
+cd path/to/project/
 cd .idea
+conda activate outfitoracle
 start welcome.html  # Use 'open welcome.html' on macOS.
 ```
 

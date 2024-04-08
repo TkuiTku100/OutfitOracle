@@ -357,7 +357,7 @@ def change_top(user):
         df = pd.read_csv(f'current_{user}.csv', header=None)
         df.loc[1:, flag_col] = 0
         df.to_csv(f'current_{user}.csv', index=False, header=False)
-        return change_top()
+        return change_top(user)
 
     last_pred = delete_last_row_and_save(f"train_{user}.csv")
     input = last_pred[:5]
@@ -398,7 +398,7 @@ def change_overtop(user):
         df = pd.read_csv(f'current_{user}.csv', header=None)
         df.loc[1:, flag_col] = 0
         df.to_csv(f'current_{user}.csv', index=False, header=False)
-        return change_overtop()
+        return change_overtop(user)
 
     last_pred = delete_last_row_and_save(f"train_{user}.csv")
     input = last_pred[:5]
@@ -439,7 +439,7 @@ def change_bottom(user):
         df = pd.read_csv(f'current_{user}.csv', header=None)
         df.loc[1:, flag_col] = 0
         df.to_csv(f'current_{user}.csv', index=False, header=False)
-        return change_bottom()
+        return change_bottom(user)
 
     last_pred = delete_last_row_and_save(f"train_{user}.csv")
     input = last_pred[:5]

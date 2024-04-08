@@ -71,6 +71,8 @@ start welcome.html  # Use 'open welcome.html' on macOS.
 
 Once you've successfully set up and started the OutfitOracle project by following the installation instructions, here's how to use the application:
 
+You can see the system video in thi repository as well.
+
 ## Logging In
 
 OutfitOracle provides two predefined user profiles you can use to log in and explore different functionalities:
